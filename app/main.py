@@ -118,9 +118,7 @@ def create_job(request: JobCreateRequest, db: Session = Depends(get_db)):
     return job
 
 
-# -----------------------------
-# Metrics
-# -----------------------------
+
 @router.get("/metrics", response_model=MetricsResponse)
 def metrics(db: Session = Depends(get_db)):
 
@@ -146,5 +144,5 @@ def metrics(db: Session = Depends(get_db)):
     }
 
 
-# Register router
+
 app.include_router(router)

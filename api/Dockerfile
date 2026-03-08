@@ -1,11 +1,9 @@
 FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /worker
 
-COPY requirements.txt .
+COPY worker.py .
 
-RUN pip install --no-cache-dir -r requirements.txt
+RUN pip install redis psycopg2-binary
 
-COPY . .
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["python", "worker.py"]

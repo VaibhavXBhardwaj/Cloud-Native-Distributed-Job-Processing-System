@@ -2,8 +2,8 @@ FROM python:3.11-slim
 
 WORKDIR /worker
 
-COPY . .
+COPY worker.py .
 
-RUN pip install redis psycopg2-binary
+RUN pip install redis
 
 CMD ["python", "worker.py"]

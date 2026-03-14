@@ -1,39 +1,39 @@
+version: "3.8"
+
 services:
+
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: job-system-api
+    ports:
+      - "8000:8000"
+    depends_on:
+      - redis
+      - db
+
+  worker:
+    build:
+      context: ./worker
+      dockerfile: Dockerfile
+    container_name: job-system-worker
+    depends_on:
+      - redis
+      - db
+
+  redis:
+    image: redis:7
+    container_name: job-system-redis
+    ports:
+      - "6379:6379"
+
   db:
     image: postgres:15
+    container_name: job-system-db
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: jobs
-    volumes:
-      - postgres_data:/var/lib/postgresql/data
-
-  redis:
-    image: redis:7
-
-  api:
-    build:
-      context: .
-      dockerfile: api/Dockerfile
     ports:
-      - "8000:8000"
-    depends_on:
-      - db
-      - redis
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs
-      REDIS_HOST: redis
-
-  worker:
-    build:
-      context: .
-      dockerfile: worker/Dockerfile
-    depends_on:
-      - db
-      - redis
-    environment:
-      DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs
-      REDIS_HOST: redis
-
-volumes:
-  postgres_data:
+      - "5432:5432"

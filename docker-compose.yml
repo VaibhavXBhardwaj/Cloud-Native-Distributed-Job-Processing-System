@@ -9,6 +9,9 @@ services:
     container_name: job-system-api
     ports:
       - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs
+      REDIS_URL: redis://redis:6379
     depends_on:
       - redis
       - db
@@ -18,6 +21,9 @@ services:
       context: ./worker
       dockerfile: Dockerfile
     container_name: job-system-worker
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs
+      REDIS_URL: redis://redis:6379
     depends_on:
       - redis
       - db

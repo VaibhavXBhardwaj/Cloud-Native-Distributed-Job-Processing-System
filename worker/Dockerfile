@@ -2,8 +2,10 @@ FROM python:3.11-slim
 
 WORKDIR /worker
 
-COPY worker.py .
+COPY ../api/requirements.txt .
 
-RUN pip install redis
+RUN pip install --no-cache-dir -r requirements.txt
+
+COPY . .
 
 CMD ["python", "worker.py"]

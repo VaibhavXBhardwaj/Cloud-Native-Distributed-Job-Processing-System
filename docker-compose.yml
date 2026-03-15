@@ -4,8 +4,8 @@ services:
 
   api:
     build:
-      context: .
-      dockerfile: api/Dockerfile
+      context: ./api
+      dockerfile: Dockerfile
     container_name: job-system-api
     ports:
       - "8000:8000"

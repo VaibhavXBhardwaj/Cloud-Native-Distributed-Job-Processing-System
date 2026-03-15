@@ -3,9 +3,7 @@ version: "3.8"
 services:
 
   api:
-    build:
-      context: ./api
-      dockerfile: Dockerfile
+    build: ./api
     container_name: job-system-api
     ports:
       - "8000:8000"
@@ -17,9 +15,7 @@ services:
       - db
 
   worker:
-    build:
-      context: ./worker
-      dockerfile: Dockerfile
+    build: ./worker
     container_name: job-system-worker
     environment:
       DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs

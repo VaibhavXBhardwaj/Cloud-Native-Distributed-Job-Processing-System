@@ -2,10 +2,8 @@ FROM python:3.11-slim
 
 WORKDIR /worker
 
-COPY ../api/requirements.txt .
+COPY worker.py .
 
-RUN pip install --no-cache-dir -r requirements.txt
-
-COPY . .
+RUN pip install rq redis psycopg2-binary
 
 CMD ["python", "worker.py"]

@@ -30,7 +30,7 @@ jobs:
         run: docker build -t job-system-api ./api
 
       - name: Build Worker Docker image
-        run: docker build -t job-system-worker ./worker
+        run: docker build -t job-system-worker -f worker/Dockerfile .
 
       - name: Deploy to EC2
         uses: appleboy/ssh-action@v1.0.3

@@ -12,6 +12,9 @@ services:
     depends_on:
       - redis
       - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs
+    restart: always
 
   worker:
     build:
@@ -21,12 +24,16 @@ services:
     depends_on:
       - redis
       - db
+    environment:
+      DATABASE_URL: postgresql://postgres:postgres@db:5432/jobs
+    restart: always
 
   redis:
     image: redis:7
     container_name: job-system-redis
     ports:
       - "6379:6379"
+    restart: always
 
   db:
     image: postgres:15
@@ -37,3 +44,4 @@ services:
       POSTGRES_DB: jobs
     ports:
       - "5432:5432"
+    restart: always

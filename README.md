@@ -238,7 +238,7 @@ docker-compose up --scale worker=3
 ### 1. Clone the Repository
 
 ```bash
-git clone <your-repo-url>
+git clone <https://github.com/VaibhavXBhardwaj/Cloud-Native-Distributed-Job-Processing-System>
 cd core-system
 ```
 
